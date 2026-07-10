@@ -21,6 +21,7 @@ SECRET_KEY = os.getenv(
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    "cloud-hrms-django.onrender.com",
     "cloud-hrms-1.onrender.com",
     "cloud-hrms-frontend-2-0.onrender.com",
     "localhost",
@@ -198,6 +199,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "cloud-hrms-django.onrender.com",
     "https://cloud-hrms-frontend-2-0.onrender.com",
 ]
 
