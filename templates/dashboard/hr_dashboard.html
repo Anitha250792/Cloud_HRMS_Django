@@ -1,0 +1,338 @@
+{% extends "layouts/dashboard_base.html" %}
+{% load static %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{% static 'css/dashboard/hr_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- HEADER -->
+
+<div class="page-header">
+
+    <h1>Dashboard</h1>
+
+    <p>Payroll command center</p>
+
+</div>
+
+
+<!-- OVERVIEW CARD -->
+
+<div class="dashboard-widget">
+
+    <div class="welcome">
+
+        <h3>
+            Good morning,
+            {{request.user.name}}
+        </h3>
+
+        <p>
+            Here's your payroll overview for January 2026
+        </p>
+
+    </div>
+
+    <div class="stats-grid">
+
+        <!-- CARD -->
+
+        <div class="mini-card">
+
+            <div class="mini-top">
+
+                <div>
+
+                    <small>
+                        Employees on payroll
+                    </small>
+
+                    <h2>{{ employee_count }}</h2>
+
+                </div>
+
+                <div class="mini-icon">
+                    <i class="fa-regular fa-circle-check"></i>
+                </div>
+
+            </div>
+
+            <div class="mini-footer">
+
+                <span>
+                    ↑ 12 from last month
+                </span>
+
+                <div class="badge">
+                    Active
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- CARD -->
+
+        <div class="mini-card">
+
+            <div class="mini-top">
+
+                <div>
+
+                    <small>
+                        Current payroll cycle
+                    </small>
+
+                    <h2>{{ generated_count }}</h2>
+
+                </div>
+
+                <div class="mini-icon">
+                    <i class="fa-regular fa-circle-check"></i>
+                </div>
+
+            </div>
+
+            <div class="mini-footer">
+
+                <span>
+                    ↑ 98.4% completed
+                </span>
+
+                <div class="badge">
+                    On Track
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- CARD -->
+
+        <div class="mini-card">
+
+            <div class="mini-top">
+
+                <div>
+
+                    <small>
+                        Pending payslips
+                    </small>
+
+                    <h2>{{ pending_count }}</h2>
+
+                </div>
+
+                <div class="mini-icon">
+                    <i class="fa-regular fa-circle-check"></i>
+                </div>
+
+            </div>
+
+            <div class="mini-footer">
+
+                <span>
+                    Review required
+                </span>
+
+                <div class="badge warning">
+                    Needs attention
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- CARD -->
+
+        <div class="mini-card">
+
+            <div class="mini-top">
+
+                <div>
+
+                    <small>
+                        Most recent generation
+                    </small>
+
+                    <h2>{{ last_generation }}</h2>
+
+                </div>
+
+                <div class="mini-icon">
+                    <i class="fa-regular fa-circle-check"></i>
+                </div>
+
+            </div>
+
+            <div class="mini-footer">
+
+                <span>
+                    Batch ID: {{ batch_id }}
+                </span>
+
+                <div class="badge">
+                    Updated
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PAYROLL PROGRESS -->
+
+<div class="dashboard-widget">
+
+    <div class="section-title">
+
+        <div class="section-icon">
+            <i class="fa-regular fa-circle-check"></i>
+        </div>
+
+        <div>
+
+            <h2>Payroll Progress</h2>
+
+            <p>January 2026</p>
+
+        </div>
+
+    </div>
+
+    <div class="progress-head">
+
+        <span>0</span>
+
+        <span>Progress</span>
+
+        <span>{{ employee_count }}</span>
+
+    </div>
+
+    <div class="progress-bar">
+
+    <div
+    class="progress-fill"
+    style="width: {{ progress }}%;">
+</div>
+
+    </div>
+
+    <div class="status-card success">
+
+        <div class="status-icon">
+            <i class="fa-regular fa-shield"></i>
+        </div>
+
+        <div>
+
+            <h4>Payslips Generated</h4>
+
+            <small>Ready for distribution</small>
+
+        </div>
+
+        <div class="status-number">
+            {{ generated_count }}
+        </div>
+
+    </div>
+
+    <div class="status-card warning">
+
+        <div class="status-icon">
+            <i class="fa-regular fa-shield"></i>
+        </div>
+
+        <div>
+
+            <h4>Payslips Pending</h4>
+
+            <small>Require action</small>
+
+        </div>
+
+        <div class="status-number">
+            {{ pending_count }}
+        </div>
+
+    </div>
+
+    <div class="status-card gray">
+
+        <div class="status-icon">
+            <i class="fa-regular fa-shield"></i>
+        </div>
+
+        <div>
+
+            <h4>Status: On Track</h4>
+
+            <small>
+                {{ generated_count }}
+generated ·
+{{ pending_count }}
+pending
+            </small>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- QUICK ACTIONS -->
+
+<div class="dashboard-widget">
+
+    <div class="section-title">
+
+        <div class="section-icon">
+            ⚡
+        </div>
+
+        <div>
+
+            <h2>Quick Actions</h2>
+
+            <p>Common admin tasks</p>
+
+        </div>
+
+    </div>
+
+    <div class="quick-grid">
+
+        <div class="quick-card">
+            <h3>Generate Payslips</h3>
+            <p>Start new payroll run</p>
+        </div>
+
+        <div class="quick-card review">
+            <h3>Review Pending</h3>
+            <p>4 payslips need attention</p>
+        </div>
+
+        <div class="quick-card reports">
+            <h3>View Reports</h3>
+            <p>Payroll summary analytics</p>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

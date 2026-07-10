@@ -1,0 +1,96 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Vetri HRMS</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/login.css' %}">
+
+</head>
+
+<body>
+
+<div class="login-wrapper">
+
+    <div class="login-container">
+
+        <!-- PAYFLOW BRAND -->
+        <div class="brand">
+
+            <div class="brand-icon">
+                🔒
+            </div>
+
+            <div class="brand-text">
+
+                <h1>PayFlow</h1>
+
+                <p>
+                    HR Payroll System
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- LOGIN CARDS -->
+        <div class="card-container">
+
+            <!-- ADMIN -->
+
+            <div class="login-card">
+
+                <img
+                    src="{% static 'images/hr-login.jpg' %}"
+                    alt="HR Login">
+
+                <a
+                    href="/hr/login/"
+                    class="login-btn">
+
+                    ADMIN LOGIN
+
+                </a>
+
+            </div>
+
+            <!-- EMPLOYEE -->
+
+            <div class="login-card">
+
+                <img
+                    src="{% static 'images/employee-login.jpg' %}"
+                    alt="Employee Login">
+
+                <a
+                    href="/employee/login/"
+                    class="login-btn">
+
+                    EMPLOYEE LOGIN
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

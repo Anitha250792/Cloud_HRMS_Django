@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>
+
+        Vetri HRMS
+
+    </title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/dashboard.css' %}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="main-container">
+
+    {% include 'includes/sidebar.html' %}
+
+    <div class="content">
+
+        {% include 'includes/navbar.html' %}
+
+        <div class="page-content">
+
+            {% block content %}
+
+            {% endblock %}
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

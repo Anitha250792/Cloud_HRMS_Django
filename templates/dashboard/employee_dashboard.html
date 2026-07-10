@@ -1,0 +1,202 @@
+{% extends "layouts/dashboard_base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{% static 'css/employee/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <h1>
+        Dashboard
+    </h1>
+
+    <p>
+        Access your payslips and profile details
+    </p>
+
+</div>
+
+
+<!-- LATEST PAYSLIP -->
+
+<div class="dashboard-card">
+
+    <div class="section-title">
+
+        <div class="icon-box">
+            <i class="fa-solid fa-file-invoice"></i>
+        </div>
+
+        <div>
+
+            <h2>
+                Latest Payslip
+            </h2>
+
+            <p>
+                Your most recent salary statement
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="payslip-grid">
+
+        <div>
+
+            <small>
+                NET PAY
+            </small>
+
+            <h1>
+                ₹{{ latest_payslip.net_pay }}
+            </h1>
+
+        </div>
+
+        <div>
+
+            <small>
+                Payslip Period
+            </small>
+
+            <h2>
+                {{ latest_payslip.month }}
+            </h2>
+
+        </div>
+
+        <a
+            href="#"
+            class="download-btn">
+
+            Download
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- SALARY SUMMARY -->
+
+<div class="dashboard-card">
+
+    <div class="section-title">
+
+        <div class="icon-box">
+            <i class="fa-solid fa-chart-column"></i>
+        </div>
+
+        <div>
+
+            <h2>
+                This Month at a Glance
+            </h2>
+
+        </div>
+
+    </div>
+
+    <div class="salary-grid">
+
+        <div class="salary-box gross">
+
+            <h3>
+                Gross Pay
+            </h3>
+
+            <h2>
+                ₹{{ latest_payslip.gross_pay }}
+            </h2>
+
+        </div>
+
+        <div class="salary-box deduction">
+
+            <h3>
+                Total Deductions
+            </h3>
+
+            <h2>
+                ₹{{ latest_payslip.total_deduction }}
+            </h2>
+
+        </div>
+
+        <div class="salary-box net">
+
+            <h3>
+                Net Pay
+            </h3>
+
+            <h2>
+                ₹{{ latest_payslip.net_pay }}
+            </h2>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PAYMENT STATUS -->
+
+<div class="dashboard-card">
+
+    <div class="section-title">
+
+        <div class="icon-box">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+
+        <div>
+
+            <h2>
+                Payroll Status
+            </h2>
+
+        </div>
+
+    </div>
+
+    <table class="status-table">
+
+        <tr>
+            <td>Payment Status</td>
+            <td>Credited</td>
+        </tr>
+
+        <tr>
+            <td>Processed Date</td>
+            <td>
+                {{ latest_payslip.payment_date }}
+            </td>
+        </tr>
+
+        <tr>
+            <td>Payment Mode</td>
+            <td>
+                Bank Transfer
+            </td>
+        </tr>
+
+        <tr>
+            <td>Bank Account</td>
+            <td>
+                ****{{ employee.bank_account|slice:"-4:" }}
+            </td>
+        </tr>
+
+    </table>
+
+</div>
+
+{% endblock %}

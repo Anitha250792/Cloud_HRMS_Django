@@ -1,0 +1,132 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>HR Login</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{% static 'css/auth.css' %}">
+
+</head>
+
+<body>
+
+<div class="auth-wrapper">
+
+    <div class="auth-container">
+
+        <!-- LEFT CARD -->
+
+        <div class="login-box">
+
+            <h1>Sign in to your Account</h1>
+
+            <p>Enter your Credentials</p>
+
+           <div class="brand">
+
+    <div class="brand-icon">
+        🔒
+    </div>
+
+    <div class="brand-text">
+        <h1>PayFlow</h1>
+        <p>HR Payroll System</p>
+    </div>
+
+</div> 
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <label>Admin ID</label>
+
+                <input
+                    type="text"
+                    name="admin_id"
+                    placeholder="Enter Admin ID">
+
+                <label>Email Address</label>
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="you@company.com">
+
+                <label>Password</label>
+
+                <div class="password-box">
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Enter your password">
+
+                    <span>👁</span>
+
+                </div>
+
+                <div class="options">
+
+                    <div>
+                        <input type="checkbox">
+                        Remember me
+                    </div>
+<a href="{% url 'forgot_password' %}">
+    Forgot password?
+</a>
+
+                </div>
+
+                <button>
+
+                    Sign In
+
+                </button>
+
+                <div class="signup">
+
+                    Don't have an account?
+
+                    <a href="#">
+                        Sign up
+                    </a>
+
+                </div>
+
+
+<a
+    href="/"
+    class="back">
+
+    ← Back to Home
+
+</a>
+
+            </form>
+
+        </div>
+
+        <!-- RIGHT IMAGE -->
+
+        <div class="illustration">
+
+            <img
+                src="{% static 'images/login.png' %}"
+                alt="HR">
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

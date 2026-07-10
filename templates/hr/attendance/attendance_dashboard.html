@@ -1,0 +1,159 @@
+{% extends "layouts/dashboard_base.html" %}
+
+{% block title %}
+Attendance Management
+{% endblock %}
+
+{% block page_title %}
+Attendance
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-header">
+
+    <h2>Attendance Management</h2>
+
+    <p>
+        Review employee attendance and payroll impact
+    </p>
+
+</div>
+
+
+<div class="stats-grid">
+
+    <div class="stat-card">
+
+        <h5>Total Employees</h5>
+
+        <h1>
+            {{ total_employees|default:"142" }}
+        </h1>
+
+        <div class="stat-icon">
+            👥
+        </div>
+
+        <div class="card-footer">
+            Current Month
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <h5>Present Employees</h5>
+
+        <h1>
+            {{ present_count|default:"126" }}
+        </h1>
+
+        <div class="stat-icon">
+            ✅
+        </div>
+
+        <div class="card-footer">
+            89% Attendance
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <h5>On Leave</h5>
+
+        <h1>
+            {{ leave_count|default:"12" }}
+        </h1>
+
+        <div class="stat-icon">
+            📅
+        </div>
+
+        <div class="card-footer">
+            Approved Leave
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <h5>Potential LOP</h5>
+
+        <h1>
+            {{ lop_count|default:"8" }}
+        </h1>
+
+        <div class="stat-icon">
+            ⚠
+        </div>
+
+        <div class="card-footer warning">
+            Payroll Review
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="dashboard-section">
+
+    <h3>
+        Attendance Details
+    </h3>
+
+    <table class="employee-table">
+
+        <thead>
+
+            <tr>
+
+                <th>Name</th>
+                <th>Employee ID</th>
+                <th>Working</th>
+                <th>Present</th>
+                <th>Leave</th>
+                <th>Absent</th>
+                <th>LOP</th>
+                <th>Status</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <td>John Smith</td>
+                <td>EMP-001</td>
+                <td>22</td>
+                <td>21</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>Present</td>
+            </tr>
+
+            <tr>
+                <td>Maria Johnson</td>
+                <td>EMP-002</td>
+                <td>22</td>
+                <td>18</td>
+                <td>2</td>
+                <td>2</td>
+                <td>0</td>
+                <td>Absent</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

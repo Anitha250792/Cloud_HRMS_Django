@@ -1,0 +1,282 @@
+{% extends "layouts/dashboard_base.html" %}
+{% load static %}
+
+{% block title %}
+Employee Management
+{% endblock %}
+
+{% block page_title %}
+Employee Management
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{% static 'css/dashboard/employee_list.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>Employee Management</h1>
+        <p>
+            Manage employee records used for payroll and payslip generation
+        </p>
+    </div>
+
+    <a href="/employees/add/"
+       class="add-btn">
+
+        <i class="fa-solid fa-plus"></i>
+        Add Employee
+
+    </a>
+
+</div>
+
+
+<!-- FILTER CARD -->
+
+<div class="filter-card">
+
+<form method="GET">
+
+    <div class="filter-grid">
+
+        <!-- Search -->
+        <div>
+            <label>Search Employees</label>
+
+            <input
+                type="text"
+                name="search"
+                value="{{ request.GET.search }}"
+                placeholder="Search by name or employee ID">
+        </div>
+
+        <!-- Department -->
+        <div>
+            <label>Departments</label>
+
+            <select name="department">
+
+                <option value="">
+                    All Departments
+                </option>
+
+                {% for dept in departments %}
+
+                <option
+                    value="{{ dept }}"
+                    {% if request.GET.department == dept %}
+                        selected
+                    {% endif %}>
+                    {{ dept }}
+                </option>
+
+                {% endfor %}
+
+            </select>
+        </div>
+
+        <!-- Status -->
+        <div>
+            <label>Status</label>
+
+            <select name="status">
+
+                <option value="">
+                    All Status
+                </option>
+
+                <option
+                    value="active"
+                    {% if request.GET.status == "active" %}
+                        selected
+                    {% endif %}>
+                    Active
+                </option>
+
+                <option
+                    value="inactive"
+                    {% if request.GET.status == "inactive" %}
+                        selected
+                    {% endif %}>
+                    Inactive
+                </option>
+
+            </select>
+        </div>
+
+    </div>
+
+    <div class="filter-footer">
+
+        <span>
+            Showing {{ employees.count }} Employees
+        </span>
+
+        <div>
+
+            <button
+                type="submit"
+                class="add-btn">
+                Filter
+            </button>
+
+            <a href="/employees/list/">
+                Clear Filters
+            </a>
+
+        </div>
+
+    </div>
+
+</form>
+
+</div>
+
+
+<!-- EMPLOYEE TABLE -->
+
+<div class="table-card">
+
+    <table>
+
+        <thead>
+<tr>
+    <th>
+        <input type="checkbox">
+    </th>
+
+    <th>Employee</th>
+    <th>Contact</th>
+    <th>Department</th>
+    <th>Role</th>
+    <th>Joining Date</th>
+    <th>Status</th>
+    <th>Actions</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for employee in employees %}
+
+<tr>
+
+<td>
+    <input type="checkbox">
+</td>
+
+<td>
+
+<div class="employee-info">
+
+            {% if employee.profile_photo %}
+                <img
+                    src="{{ employee.profile_photo.url }}"
+                    class="avatar">
+            {% else %}
+                <img
+                    src="{% static 'images/default-avatar.png' %}"
+                    class="avatar">
+            {% endif %}
+
+            <div>
+
+                <h4>
+                    {{ employee.name }}
+                </h4>
+
+                <small>
+                    ID: {{ employee.emp_code }}
+                </small>
+
+            </div>
+
+        </div>
+
+    </td>
+
+<td>
+
+    <div class="contact-email">
+        {{ employee.email }}
+    </div>
+
+    <div class="contact-phone">
+        {{ employee.phone }}
+    </div>
+
+</td>
+
+    <td>
+
+        {{ employee.department }}
+
+    </td>
+
+    <td>
+    {{ employee.designation|default:employee.role }}
+</td>
+
+    <td>
+
+       {{ employee.date_joined|date:"n/j/Y" }}
+
+    </td>
+
+    <td>
+
+        {% if employee.is_active %}
+            <span class="status-badge">
+                Active
+            </span>
+        {% else %}
+            <span class="status-badge inactive">
+                Inactive
+            </span>
+        {% endif %}
+
+    </td>
+<td>
+
+<div class="action-buttons">
+
+    <a href="#">
+        <i class="fa fa-eye"></i>
+    </a>
+
+    <a href="/employees/edit/{{ employee.id }}/">
+        <i class="fa fa-pen"></i>
+    </a>
+
+    <a href="/employees/delete/{{ employee.id }}/"
+       onclick="return confirm('Delete employee?')">
+        <i class="fa fa-trash"></i>
+    </a>
+
+</div>
+
+</td>
+</tr>
+
+{% empty %}
+
+<tr>
+    <td colspan="7">
+        No employees found
+    </td>
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

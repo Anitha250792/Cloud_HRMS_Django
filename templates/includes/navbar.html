@@ -1,0 +1,79 @@
+{% load static %}
+
+<header class="navbar">
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+        <span>
+            🔍
+        </span>
+
+        <input
+            type="text"
+            placeholder="Search ...">
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="nav-right">
+
+        <!-- NOTIFICATION -->
+
+        <div class="notification">
+
+            <button class="notify-btn">
+
+                🔔
+
+                {% if unread_notifications.count > 0 %}
+                <span class="notify-count">
+
+                    {{ unread_notifications.count }}
+
+                </span>
+                {% endif %}
+
+            </button>
+
+        </div>
+
+        <!-- PROFILE -->
+
+        <div class="profile">
+
+            <img
+                src="{% static 'images/profile.png' %}"
+                alt="profile">
+
+            <div>
+
+                <h4>
+
+                    {% if request.user.name %}
+                        {{ request.user.name }}
+                    {% else %}
+                        Admin
+                    {% endif %}
+
+                </h4>
+
+                <small>
+
+                    {% if request.user.role == 'HR' %}
+                        HR Manager
+                    {% else %}
+                        Employee
+                    {% endif %}
+
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
