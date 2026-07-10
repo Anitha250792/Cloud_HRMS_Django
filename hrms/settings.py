@@ -18,7 +18,7 @@ SECRET_KEY = os.getenv(
     "django-insecure-change-this-only-for-local"
 )
 
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = [
     "cloud-hrms-django.onrender.com",
