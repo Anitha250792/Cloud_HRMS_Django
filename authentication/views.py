@@ -3,8 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate, get_user_model
-from google.oauth2 import id_token
-from google.auth.transport import requests
+
 
 from django.views.generic import TemplateView
 
@@ -89,50 +88,7 @@ def login_user(request):
         }
     )
 
-GOOGLE_CLIENT_ID = "437563404520-kft1nf9judspf4mk907hrg70c1drqpm3.apps.googleusercontent.com"
 
-@api_view(["POST"])
-def google_login(request):
-    try:
-        credential = request.data.get("credential")
-        if not credential:
-            return Response({"error": "Missing credential"}, status=400)
-
-        # Verify token from Google
-        idinfo = id_token.verify_oauth2_token(
-            credential,
-            requests.Request(),
-            GOOGLE_CLIENT_ID
-        )
-
-        email = idinfo["email"]
-        name = idinfo.get("name", "Google User")
-
-        # If user exists → login
-        try:
-            user = User.objects.get(email=email)
-        except User.DoesNotExist:
-            # If no user → create one
-            user = User.objects.create_user(
-                name=name,
-                email=email,
-                password="google-auth",  # dummy password
-                role="EMPLOYEE"
-            )
-
-        refresh = RefreshToken.for_user(user)
-
-        return Response({
-            "access": str(refresh.access_token),
-            "refresh": str(refresh),
-            "role": user.role,
-            "message": "Google login success"
-        })
-
-    except Exception as e:
-        print("GOOGLE LOGIN ERROR:", e)
-        return Response({"error": "Google login failed"}, status=400)
-    
 
 
 class ForgotPasswordView(TemplateView):
