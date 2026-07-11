@@ -199,7 +199,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "cloud-hrms-django.onrender.com",
+    "https://cloud-hrms-django.onrender.com",
     "https://cloud-hrms-frontend-2-0.onrender.com",
 ]
 
